@@ -26,7 +26,19 @@ const getInput = player => async () => {
   const [row = 0, col = 0] = ans.coord.split(/[,\s+]/).map(x => +x);
   game.dispatch(move(turn, [row, col]));
 
-  // const wins = winner(game.getState().board);ç
+  const wins = streak(
+    game.getState().board,
+    [0, 0],
+    [0, 1],
+    [0, 2],
+    [1, 0],
+    [1, 1],
+    [1, 2],
+    [2, 0],
+    [2, 1],
+    [2, 2]
+  );
+  console.log(wins);
 };
 
 // Create the store

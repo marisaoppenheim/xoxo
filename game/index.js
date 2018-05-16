@@ -1,4 +1,4 @@
-import { Map } from "immutable";
+import { Map, getIn } from "immutable";
 
 export default function reducer(state = { board: Map(), turn: "X" }, action) {
   switch (action.type) {
@@ -16,9 +16,10 @@ export const winner = board => {
   let i = 2;
   let streakWinner;
   while (i >= 0) {
-    if (streak(board, [0, i], [1, i], [2, i])) {
+    streak(board, [0, 0], [1, 0], [2, 0]) {
       streakWinner = streak(board, [0, i], [1, i], [2, i]);
       return streakWinner;
+    }
     } else if (streak(board, [i, 0], [i, 1], [i, 2])) {
       streakWinner = streak(board, [i, 0], [i, 1], [i, 2]);
       return streakWinner;
@@ -44,9 +45,10 @@ export const streak = (board, firstCoord, ...remainingCoords) => {
 
   const coordArr = [...remainingCoords];
 
+  return [coordArr, ...remainingCoords];
   for (var i = 0; i < coordArr.length; i++) {
     let checkCoord = board.getIn(coordArr[i]);
-
+    console.log(checkCoord, firstValue);
     if (checkCoord === firstValue) {
       continue;
     } else {
